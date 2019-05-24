@@ -20,7 +20,6 @@ $(document).ready(function () {
             return false
         });
         socket.on('updated_message', function (data) {
-            // $("#messages").append("<p><span class="font-weight-bold">" + data.name + "</span>: " + data.message + "</p>");
             if (data.message != ""){
                 $("#messages").append("<tr><td class='font-weight-bold'>" + data.name + ":</td><td>" + data.message + "</td></tr>");
             }

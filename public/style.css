@@ -1,7 +1,11 @@
 .textinput {
     position: sticky;
     bottom: 1em;
-    margin-bottom: 1em;
+    margin: .5em 0px 0px 0px;
+}
+
+.form-group {
+    margin: 0;
 }
 
 .messageview {

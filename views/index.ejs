@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>K Chat</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/main.js"></script>
+        <link type="text/css" rel="stylesheet" href="/style.css">
+    </head>
+
+    <body>
+        <div id="hidden" class="container">
+            <h1 class="display-4 font-weight-bold">K Board</h1>
+            <div class="messageview">
+                <table class="table table-sm table-responsive">
+                    <tbody id="messages">
+                        <% for (var x in key) { %>
+                        <tr>
+                            <td class="font-weight-bold"><%= key[x].name %></td>
+                            <td><%= key[x].message %></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <!-- <div id="messages" class="lead">
+                    <% for (var x in key) { %>
+                    <p><span class="font-weight-bold"><%= key[x].name %></span>: <%= key[x].message %></p>
+                    <% } %>
+                </div> -->
+            </div>
+
+            <form id="forms" class="textinput">
+                <div class="form-group">
+                    <input id='message' type='text' name='message' class="form-control-sm align-top">
+                    <button id="sendbutton" class="btn btn-secondary btn-sm align-top">Send</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

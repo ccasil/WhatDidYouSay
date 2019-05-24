@@ -1,0 +1,14 @@
+.textinput {
+    position: sticky;
+    bottom: 1em;
+    margin-bottom: 1em;
+}
+
+.messageview {
+    overflow-y: auto;
+    height: 90vh;
+}
+
+.table {
+    width: auto;
+}

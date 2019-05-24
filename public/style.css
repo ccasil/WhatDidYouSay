@@ -1,18 +1,11 @@
-.textinput {
-    position: sticky;
+.form-group {
     bottom: 1em;
     margin: .5em 0px 0px 0px;
 }
-
-.form-group {
-    margin: 0;
-}
-
 .messageview {
     overflow-y: auto;
-    height: 90vh;
+    height: 80vh;
 }
-
 .table {
     width: auto;
 }

@@ -6,11 +6,12 @@ $(document).ready(function () {
     if (username) {
         $("#hidden").show();
         name = username
-        // console.log("name:" + name)
+        var rand1 = Math.floor(Math.random() * 256);
+        var rand2 = Math.floor(Math.random() * 256);
+        var rand3 = Math.floor(Math.random() * 256);
         socket.emit("new_user", {
             name: name
         });
-
         $('#forms').submit(function () {
             socket.emit("createmessage", {
                 message: $("#message").val(),
@@ -19,14 +20,14 @@ $(document).ready(function () {
             $("#message").val("");
             return false
         });
-        socket.on('updated_message', function (data) {
+        socket.on('updatedmessage', function (data) {
             if (data.message != ""){
-                $("#messages").append("<tr><td class='font-weight-bold'>" + data.name + ":</td><td>" + data.message + "</td></tr>");
+                $("#messages").append("<tr><td class='font-weight-bold' style='color: rgb(" + rand1 + ", " + rand2 + "," + rand3 + ");'>" + data.name + ":</td><td>" + data.message + "</td></tr>");
             }
         });
     }
     else if (username == "") {
-        alert("YOU MUST ENTER A NAME! THIS WEBPAGE WILL RELOAD AFTER YOUR PRESS 'OK'");
+        alert("A name is needed to send messages! This page will refresh after clicking 'OK'");
         location.reload();
     }
 });

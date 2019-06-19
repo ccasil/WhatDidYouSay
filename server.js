@@ -37,15 +37,18 @@ io.sockets.on('connection', function (socket) {
     socket.on("createmessage", function (data) {
         let n = data.name;
         let m = data.message;
+        let c = data.color;
 
         messages.push({
             name: n,
-            message: m
+            message: m,
+            color: c
         });
 
         io.emit('updatedmessage', {
             name: data.name,
             message: data.message,
+            color: data.color,
             allmessages: messages
         });
     })

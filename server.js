@@ -17,6 +17,7 @@ app.set('view engine', 'ejs');
 let messages = [];
 
 app.get('/', function (req, res) {
+    console.log("Session ID: ", req.sessionID);
     res.render("index", { key: messages });
 })
 

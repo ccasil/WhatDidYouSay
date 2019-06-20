@@ -5,6 +5,7 @@
 .messageview {
     overflow-y: auto;
     height: 80vh;
+    border: 2px solid black;
 }
 .table {
     width: auto;

@@ -18,18 +18,20 @@ app.set('view engine', 'ejs');
 let messages = [];
 
 app.get('/', function (req, res) {
-    console.log("Session ID: ", req.sessionID);
+    console.log("Session ID:", req.sessionID);
     res.render("login");
-    // res.render("index", { key: messages });
 })
 
 app.post('/chat', function (req, res) {
     req.session.body = req.body;
-    console.log("POST DATA", req.session.body);
+    console.log("Username:", req.session.body);
     res.redirect("/chat");
 })
 
 app.get('/chat', function (req, res) {
+    if(req.session.body == undefined){
+        res.render("login");
+    }
     res.render("index", { body: req.session.body, key: messages });
 })
 
@@ -41,7 +43,7 @@ const server = app.listen(8000, function () {
 const io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
 
-    console.log("Client/Socket connected with id: ", socket.id);
+    console.log("Socket ID:", socket.id);
 
     socket.on('disconnect', function () {
         console.log('User Disconnected');

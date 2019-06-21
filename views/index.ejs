@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>What Did You Say?</title>
+        <link href="../public/favicon.ico" rel="icon" type="image/x-icon" />
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -12,26 +13,66 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="/main.js"></script>
         <link type="text/css" rel="stylesheet" href="/style.css">
+
+        <script>
+            $(document).ready(function () {
+                var username = "<%= body.username %>";
+                var socket = io.connect();
+                var username;
+                var rand1 = Math.floor(Math.random() * 256);
+                var rand2 = Math.floor(Math.random() * 256);
+                var rand3 = Math.floor(Math.random() * 256);
+                var randcol = "color: rgb(" + rand1 + ", " + rand2 + "," + rand3 + ");";
+                var color;
+                if (username) {
+                    name = username;
+                    color = randcol;
+                    socket.emit("new_user", {
+                        name: name,
+                        color: color
+                    });
+                    $('#forms').submit(function () {
+                        var input = $("#message").val()
+                        socket.emit("createmessage", {
+                            message: input.toString(),
+                            name: name,
+                            color: color
+                        });
+                        $("#message").val("");
+                        return false
+                    });
+                    socket.on('updatedmessage', function (data) {
+                        if (data.message != "") {
+                            $("#messages").append("<tr><td class='font-weight-bold' style='" + data.color + "'>" + data.name + ":</td><td>" + data.message + "</td></tr>");
+                        }
+                        $("#messageview").scrollTop($("#messageview")[0].scrollHeight + 800);
+                    });
+                } else if (username == "") {
+                    alert("A name is needed to send messages! This page will refresh after clicking 'OK'");
+                    location.reload();
+                }
+            });
+        </script>
     </head>
+
     <body id="hidden" class="container">
         <h1 class="display-4 font-weight-bold">What Did You Say?</h1>
-        <div class="messageview">
+        <div id="messageview">
             <table class="table table-sm table-responsive lead w-100">
                 <tbody id="messages">
                     <% for (var x in key) { %>
                     <tr>
                         <td class="font-weight-bold" style="<%= key[x].color %>"><%= key[x].name %>:</td>
-                        <td><%= key[x].message %></td>
+                        <td class="lead"><%= key[x].message %></td>
                     </tr>
                     <% } %>
                 </tbody>
             </table>
         </div>
-        <form id="forms">
+        <form id="forms" method="GET">
             <div class="form-group">
-                <input id="message" type="text" name="message" class="form-control-sm align-top">
+                <span class="lead"><%= body.username %>: </span><input id="message" type="text" name="message" class="form-control-sm align-top">
                 <button id="sendbutton" class="btn btn-dark btn-sm align-top">Send</button>
             </div>
         </form>

@@ -2,10 +2,11 @@
     bottom: 1em;
     margin: .5em 0px 0px 0px;
 }
-.messageview {
+#messageview {
     overflow-y: auto;
     height: 80vh;
     border: 2px solid black;
+    scroll-behavior: smooth;
 }
 .table {
     width: auto;

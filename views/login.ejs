@@ -20,16 +20,23 @@
         crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="/main.js"></script>
     <link type="text/css" rel="stylesheet" href="/style.css">
+
+    <script>
+    $(document).ready(function () {
+            $('#login').submit(function () {
+                username: $("#username").val()
+            });
+        });
+    </script>
 </head>
 
 <body class="container">
     <h1 class="display-4 font-weight-bold">What Did You Say?</h1>
-    <form id="login">
+    <form id="login" action="/chat" method="POST">
         <div class="form-group">
-            <input id="username" type="text" name="message" class="form-control-sm align-top">
-            <button id="sendbutton" class="btn btn-dark btn-sm align-top">Send</button>
+            <input placeholder="username" id="username" type="text" name="username" class="form-control-sm align-top">
+            <button id="sendbutton" class="btn btn-dark btn-sm align-top">Submit</button>
         </div>
     </form>
 </body>

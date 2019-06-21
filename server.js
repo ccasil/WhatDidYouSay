@@ -9,6 +9,7 @@ app.use(session({
     resave: true,
     saveUninitialized: false
 }));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, '/views'));
@@ -18,7 +19,18 @@ let messages = [];
 
 app.get('/', function (req, res) {
     console.log("Session ID: ", req.sessionID);
-    res.render("index", { key: messages });
+    res.render("login");
+    // res.render("index", { key: messages });
+})
+
+app.post('/chat', function (req, res) {
+    req.session.body = req.body;
+    console.log("POST DATA", req.session.body);
+    res.redirect("/chat");
+})
+
+app.get('/chat', function (req, res) {
+    res.render("index", { body: req.session.body, key: messages });
 })
 
 const server = app.listen(8000, function () {

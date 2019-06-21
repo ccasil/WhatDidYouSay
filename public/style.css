@@ -8,3 +8,6 @@
     border: 2px solid black;
     scroll-behavior: smooth;
 }
+.table {
+    width: auto;
+}

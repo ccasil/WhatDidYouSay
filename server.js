@@ -23,8 +23,13 @@ app.get('/', function (req, res) {
 })
 
 app.post('/chat', function (req, res) {
+    var rand1 = Math.floor(Math.random() * 256),
+        rand2 = Math.floor(Math.random() * 256),
+        rand3 = Math.floor(Math.random() * 256);
+    var randcol = "color: rgb(" + rand1 + ", " + rand2 + "," + rand3 + ");";
+    req.session.color = randcol;
     req.session.body = req.body;
-    console.log("Username:", req.session.body);
+    console.log(req.session.color, req.session.body);
     res.redirect("/chat");
 })
 
@@ -32,7 +37,7 @@ app.get('/chat', function (req, res) {
     if(req.session.body == undefined){
         res.render("login");
     }
-    res.render("index", { body: req.session.body, key: messages });
+    res.render("index", { color: req.session.color, body: req.session.body, key: messages });
 })
 
 const server = app.listen(8000, function () {

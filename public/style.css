@@ -1,6 +1,7 @@
 .form-group {
     bottom: 1em;
     margin: .5em 0px 0px 0px;
+    padding-left: .3rem;
 }
 #messageview {
     overflow-y: auto;

@@ -16,6 +16,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
 let messages = [];
+let users = [];
 
 app.get('/', function (req, res) {
     console.log("Session ID:", req.sessionID);
@@ -29,7 +30,7 @@ app.post('/chat', function (req, res) {
     var randcol = "color: rgb(" + rand1 + ", " + rand2 + "," + rand3 + ");";
     req.session.color = randcol;
     req.session.body = req.body;
-    console.log(req.session.color, req.session.body);
+    console.log(req.session.color, "Username: " + req.session.body.username);
     res.redirect("/chat");
 })
 
@@ -37,7 +38,7 @@ app.get('/chat', function (req, res) {
     if(req.session.body == undefined){
         res.render("login");
     }
-    res.render("index", { color: req.session.color, body: req.session.body, key: messages });
+    res.render("index", { color: req.session.color, body: req.session.body, key: messages, count: count });
 })
 
 const server = app.listen(8000, function () {
@@ -48,10 +49,18 @@ const server = app.listen(8000, function () {
 const io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
 
+    users.push(socket.id);
     console.log("Socket ID:", socket.id);
+    console.log("Current Users: ", users);
 
     socket.on('disconnect', function () {
-        console.log('User Disconnected');
+        console.log('User Disconnected:', socket.id);
+        for (var i = 0; i < users.length; i++) {
+            if (users[i] == socket.id) {
+                users.splice(i, 1);
+            }
+        }
+        console.log("Current Users: ", users);
     });
 
     socket.on("createmessage", function (data) {

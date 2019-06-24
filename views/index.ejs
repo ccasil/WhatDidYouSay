@@ -19,10 +19,6 @@
             $(document).ready(function () {
                 var username = "<%= body.username %>";
                 var socket = io.connect();
-                // var rand1 = Math.floor(Math.random() * 256);
-                // var rand2 = Math.floor(Math.random() * 256);
-                // var rand3 = Math.floor(Math.random() * 256);
-                // var randcol = "color: rgb(" + rand1 + ", " + rand2 + "," + rand3 + ");";
                 var randcol = "<%= color %>";
                 var color;
                 if (username) {

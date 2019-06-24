@@ -39,7 +39,7 @@
                     });
                     socket.on('updatedmessage', function (data) {
                         if (data.message != "") {
-                            $("#messages").append("<tr><td class='font-weight-bold' style='" + data.color + "'>" + data.name + ":</td><td>" + data.message + "</td></tr>");
+                            $("#messages").append("<tr><td class='font-weight-bold lead' style='" + data.color + "'>" + data.name + ":</td><td class='lead'>" + data.message + "</td></tr>");
                         }
                         $("#messageview").scrollTop($("#messageview")[0].scrollHeight + 800);
                     });
@@ -48,10 +48,10 @@
         </script>
     </head>
 
-    <body id="hidden" class="container">
+    <body class="container">
         <h1 class="display-4">What Did You Say?</h1>
         <div id="messageview">
-            <table class="table table-sm table-borderless table-striped table-responsive lead w-100">
+            <table class="table table-sm table-borderless table-striped lead w-auto">
                 <tbody id="messages">
                     <% for (var x in key) { %>
                     <tr>
@@ -63,9 +63,14 @@
             </table>
         </div>
         <form id="forms" method="GET">
-            <div class="form-group">
-                <span class="font-weight-bold lead" style="<%= color %>"><%= body.username %>: </span><input id="message" type="text" name="message" class="form-control-sm align-top">
-                <button id="sendbutton" class="btn btn-dark btn-sm align-top">Send</button>
+            <div class="form-group row">
+                <span class="font-weight-bold lead" style="<%= color %>"><%= body.username %>: </span>
+                <div class="col">
+                    <input id="message" type="text" name="message" class="form-control-sm align-top w-100">
+                </div>
+                <div class="col-2">
+                    <button id="sendbutton" class="btn btn-dark btn-sm align-top w-100">Send</button>
+                </div>
             </div>
         </form>
     </body>

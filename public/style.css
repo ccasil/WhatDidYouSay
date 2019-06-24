@@ -8,7 +8,12 @@
     height: 80vh;
     border: 2px solid black;
     scroll-behavior: smooth;
+    border-radius: .2rem;
+    min-width: 300px;
 }
 .table {
     width: auto;
+}
+.col, .col-2 {
+    padding: 0px 2px 0px 4px;
 }

@@ -38,7 +38,7 @@ app.get('/chat', function (req, res) {
     if(req.session.body == undefined){
         res.render("login");
     }
-    res.render("index", { color: req.session.color, body: req.session.body, key: messages, count: count });
+    res.render("index", { color: req.session.color, body: req.session.body, key: messages });
 })
 
 const server = app.listen(8000, function () {

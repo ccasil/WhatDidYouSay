@@ -1,19 +1,5 @@
-.form-group {
-    bottom: 1em;
-    margin: .5em 0px 0px 0px;
-    padding-left: .3rem;
-}
 #messageview {
     overflow-y: auto;
     height: 80vh;
-    border: 2px solid black;
     scroll-behavior: smooth;
-    border-radius: .2rem;
-    min-width: 300px;
-}
-.table {
-    width: auto;
-}
-.col, .col-2 {
-    padding: 0px 2px 0px 4px;
 }
